@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  web:
+    image: php-custom:v1
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db  
+    # networks:
+    #   - custom_network
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
+      MYSQL_USER: ishtiaq
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    # networks:
+    #   - custom_network
+
+# networks:
+#   custom_network:
+#     driver: bridge
+volumes:
+  my-db:
